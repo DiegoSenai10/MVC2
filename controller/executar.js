@@ -1,30 +1,19 @@
 const express = require('express');
-const Calculadora = require('../model/Calculadora');
+const Calculo = require('../model/calculo');
+const resultado = express.Router();
 
-const calculadoraController = express.Router();
-
-calculadoraController.post('/calcular', (req, res) => {
-    const { num1, num2, operacao } = req.body;
-    
-    let resultado;
-    switch (operacao) {
-        case 'soma':
-            resultado = Calculadora.soma(parseFloat(num1), parseFloat(num2));
-            break;
-        case 'subtracao':
-            resultado = Calculadora.subtracao(parseFloat(num1), parseFloat(num2));
-            break;
-        case 'multiplicacao':
-            resultado = Calculadora.multiplicacao(parseFloat(num1), parseFloat(num2));
-            break;
-        case 'divisao':
-            resultado = Calculadora.divisao(parseFloat(num1), parseFloat(num2));
-            break;
-        default:
-            resultado = 'Operação inválida';
-    }
-
-    res.render('resultado', { resultado, operacao });
+resultado.post('/hipotenusa', (req, res)=>{
+    const { cateto1, cateto2 } = req.body;
+    const hipotenusa = Calculo.Hipotenusa(
+        parseFloat(cateto1), parseFloat(cateto2));
+    res.redirect(`/resultado.html?hipotenusa=${hipotenusa}`);
 });
 
-module.exports = calculadoraController;
+resultado.post('/multiplicacao', (req, res)=>{
+    const { valor1, valor2 } = req.body;
+    const resultadoMultiplicacao = Calculo.Multiplicacao(
+        parseFloat(valor1), parseFloat(valor2));
+    res.redirect(`/resultado.html?resultado=${resultadoMultiplicacao}`);
+});
+
+module.exports = resultado;

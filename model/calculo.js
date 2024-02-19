@@ -1,23 +1,8 @@
-class Calculadora {
-    static soma(num1, num2) {
-        return num1 + num2;
-    }
+class Calculo {
 
-    static subtracao(num1, num2) {
-        return num1 - num2;
-    }
-
-    static multiplicacao(num1, num2) {
-        return num1 * num2;
-    }
-
-    static divisao(num1, num2) {
-        if (num2 !== 0) {
-            return num1 / num2;
-        } else {
-            return 'Divisão por zero';
-        }
+    static Multiplicacao(valor1, valor2) {
+        return valor1 * valor2;
     }
 }
 
-module.exports = Calculadora;
+module.exports = Calculo;
